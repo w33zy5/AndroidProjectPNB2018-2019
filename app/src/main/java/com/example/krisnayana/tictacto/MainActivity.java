@@ -7,42 +7,103 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private String asli, hasil, split, reverse;
-    private EditText editAsli;
-    private TextView txtHasil;
-    private int n;
+    private LinearLayout linearlayout[];
+    private Button btn[][];
+    private LinearLayout latas;
+    private int giliran = 0;
+    private int merah, hijau, abu;
 
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        editAsli = findViewById(R.id.editKataAsli);
-        txtHasil = findViewById(R.id.textHasil);
-        Button btnok = findViewById(R.id.buttonOK);
-        btnok.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
-                String str = editAsli.getText().toString();
-                String reverse = new StringBuffer(str).reverse().toString();
-                txtHasil.setText("Kalimat terbalik :"+reverse);
-                /*asli = editAsli.getText().toString();
-                int n = asli.length();
-                hasil = "";
-                for(int i = n-1; i >= 0; i--){
-                    hasil = hasil + asli.charAt(i);
+
+        merah = ContextCompat.getColor(this,R.color.merah);
+        hijau = ContextCompat.getColor(this,R.color.hijau);
+        abu = ContextCompat.getColor(this,R.color.abu);
+
+        Point layar = new Point();
+        getWindowManager().getDefaultDisplay().getSize(layar);
+
+        int lebarTombol = (int)(layar.x/3);
+
+        linearlayout = new LinearLayout[3];
+
+        btn = new Button[3][3];
+
+        latas = findViewById(R.id.layoutatas);
+
+        LinearLayout.LayoutParams x = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        giliran = 0;
+
+        int n = 0;
+
+        for(int i = 0; i < 3; i++){
+            linearlayout[i] = new LinearLayout(this);
+            linearlayout[i].setOrientation(LinearLayout.HORIZONTAL);
+            linearlayout[i].setLayoutParams(x);
+
+            latas.addView(linearlayout[i]);
+            for(int j = 0; j < 3; j++){
+                btn[i][j] = new Button(this);
+                btn[i][j].setId(n++);
+                btn[i][j].setText("");
+                btn[i][j].setTextSize(20);
+
+                btn[i][j].setOnClickListener(this);
+                btn[i][j].setWidth(lebarTombol);
+                btn[i][j].setHeight(400);
+
+                linearlayout[i].addView(btn[i][j]);
+            }
+        }
+
+        Button ulang = findViewById(R.id.buttonUlang);
+        ulang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                giliran = 0;
+                for(int i = 0; i < 3; i++){
+                    for(int j = 0; j < 3; j++){
+                        btn[i][j].setText("");
+                        btn[i][j].setEnabled(true);
+                        btn[i][j].setBackgroundColor(abu);
+                    }
                 }
-                txtHasil.setText("Kata terbalik :" + hasil);*/
             }
         });
-        Button btnKeluar = findViewById(R.id.buttonKeluar);
-        btnKeluar.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+
+        Button keluar = findViewById(R.id.buttonKeluar);
+        keluar.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
                 System.exit(0);
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                if(v.getId()==btn[i][j].getId()){
+                    if(giliran%2==0){
+                        btn[i][j].setText("O");
+                        btn[i][j].setEnabled(false);
+                        btn[i][j].setBackgroundColor(merah);
+                    }else{
+                        btn[i][j].setText("X");
+                        btn[i][j].setEnabled(false);
+                        btn[i][j].setBackgroundColor(hijau);
+                    }
+                    giliran++;
+                }
+            }
+        }
     }
 }

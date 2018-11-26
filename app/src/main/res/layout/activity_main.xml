@@ -7,41 +7,41 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:id="@+id/layoutatas"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="400dp"
+        android:orientation="vertical" />
+        <!--android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="0dp"-->
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Masukkan Kata" />
 
-        <EditText
-            android:id="@+id/editKataAsli"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName" />
-
-        <TextView
-            android:id="@+id/textHasil"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Kata terbalik:" />
+    <LinearLayout
+        android:id="@+id/layoutbawah"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/layoutatas"
+        android:layout_marginTop="0dp"
+        android:orientation="horizontal">
 
         <Button
-            android:id="@+id/buttonOK"
+            android:id="@+id/buttonUlang"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ok" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Ulang" />
 
         <Button
             android:id="@+id/buttonKeluar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:text="Keluar" />
-
     </LinearLayout>
 
 </RelativeLayout>
