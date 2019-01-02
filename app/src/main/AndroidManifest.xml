@@ -16,6 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".LihatdataActivity" />
+        <activity android:name=".TambahdataActivity"></activity>
     </application>
 
 </manifest>
